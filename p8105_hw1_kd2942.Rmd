@@ -15,6 +15,7 @@ usethis::create_github_token()
 gitcreds::gitcreds_set()
 ```
 
+#**PROBLEM #1**
 #loading penguins dataset
 ```{r penguins}
 data("penguins", package = "palmerpenguins")
@@ -30,13 +31,47 @@ skimr::skim(penguins)
 #The penguins data set has 344 rows and 8 columns. There are a total of 8 variables in this data set, 3 descriptive and 5 numeric. The descriptive variables are as follows: species (3 values), island (3 values), and sex (2 values). The numeric variables are as follows: bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, and year. The mean flipper length can be found in the results of the above skimr, where it is recorded to be 201 mm with a standard deviation of 14.1 mm. 
 ```
 
+#creating a ggplot and saving it as a pdf to project
 ```{r}
 library(ggplot2)
 k <- ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species, fill = species)) +
   geom_point() 
   ggsave("penguinplot.pdf")
 k
+```
 
+#**PROBLEM #2**
+#creating dataset obtaining the means of the variables in the df
+```{r}
+problem2_df = tibble(
+  norm_samp = rnorm(10),
+  norm_samp_pos = norm_samp > 0,
+  vec_char = c("California", "Alabama", "Hawaii", "New York", "New Jersey", "Florida", "South Dakota", "North Dakota", "Texas", "Oregon"),
+  vec_factor = factor(c("Blue", "Red", "Blue", "Blue", "Swing", "Red", "Swing", "Swing", "Red", "Blue"))
+)
+problem2_df
+
+mean(problem2_df$norm_samp) 
+mean(problem2_df$norm_samp_pos)
+mean(problem2_df$vec_char)
+mean(problem2_df$vec_factor)
+```
+
+#observation of how R takes the means of the variables
+```{r}
+#The means are obtained for the first two variables, norm_samp and norm_samp_pos, because norm_samp is numeric and norm_samp_pos is logical. R is able to calculate the means of these variables, but unable to do so for the character and factor variables due to their non-numeric and non-logical nature. 
+```
+
+#use of as.numeric function on logical, character, and factor variables
+```{r}
+as.numeric(problem2_df$vec_char)
+as.numeric(problem2_df$norm_samp_pos)
+as.numeric(problem2_df$vec_factor)
+```
+
+#observation of what the as.numeric function does to above variables and how that relates to R #finding the mean of them 
+```{r}
+#The as.numeric function is able to turn the logical variable and the factor variable into numeric values, but it is unable to do so for the character variable. The character variable is categorical data, and therefore cannot be given a numerical value. This explains why R cannot compute the mean of the character variable.The logical and factor variables are ordinal, so they are able to be converted into numerical values. However, the factor variable has 3 levels, which would render a mean value illogical. A mean can be taken for the logical variable because it only has two variables the mean has significance.
 ```
 
 
