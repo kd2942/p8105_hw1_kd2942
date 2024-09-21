@@ -4,20 +4,39 @@ output: github_document
 date: "2024-09-21"
 ---
 
+#setting up R markdown
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+#pushing to git
+```{r}
+usethis::create_github_token()
+gitcreds::gitcreds_set()
+```
+
+#loading penguins dataset
 ```{r penguins}
 data("penguins", package = "palmerpenguins")
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+#viewing data set
+```{r viewingdata}
+skimr::skim(penguins)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+#**Description of penguins data set**:
+```{r description}
+#The penguins data set has 344 rows and 8 columns. There are a total of 8 variables in this data set, 3 descriptive and 5 numeric. The descriptive variables are as follows: species (3 values), island (3 values), and sex (2 values). The numeric variables are as follows: bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, and year. The mean flipper length can be found in the results of the above skimr, where it is recorded to be 201 mm with a standard deviation of 14.1 mm. 
+```
+
+```{r}
+library(ggplot2)
+k <- ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species, fill = species)) +
+  geom_point() 
+  ggsave("penguinplot.pdf")
+k
+
+```
+
+
