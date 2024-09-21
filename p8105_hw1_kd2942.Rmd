@@ -1,0 +1,23 @@
+---
+title: "p8105_hw1_kd2942"
+output: github_document
+date: "2024-09-21"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r penguins}
+data("penguins", package = "palmerpenguins")
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
