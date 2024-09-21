@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 #pushing to git
-```{r}
+```{r git}
 usethis::create_github_token()
 gitcreds::gitcreds_set()
 ```
